@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>802</width>
+    <height>599</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>802</width>
+    <height>599</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>802</width>
+    <height>599</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string notr="true">Cedrata Detector</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="home_tab">
+       <attribute name="title">
+        <string>Home</string>
+       </attribute>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>781</width>
+          <height>551</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Welcome in Cedrata Detector. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;This is a ML based tool able to detect where notes are played in audio files.&lt;/p&gt;&lt;p&gt;The workflow to follow is simple, just follow the tab order:&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;In the &lt;span style=&quot; font-weight:600;&quot;&gt;classify &lt;/span&gt;tab it's possible to classify reference audio samples, those will be what you consider a note. &lt;br/&gt;The machine will learn and retrive a file to use in the prediction tab.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;In the &lt;span style=&quot; font-weight:600;&quot;&gt;predict &lt;/span&gt;tab it's possible to use the classification file and use it as a reference on a selected audio track. &lt;br/&gt;The result will be a csv file containing two columns named &amp;quot;sample&amp;quot; and rname (wich is a field to fill). &lt;br/&gt;The audio is divided in multiple chuncks overlapping one each other, &amp;quot;sample&amp;quot; refers to the chunk number, &lt;br/&gt;rname is a value from 1 to 5, where 5 is certanly a note, and 1 is not at all a note.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;In the &lt;span style=&quot; font-weight:600;&quot;&gt;merge &lt;/span&gt;tab, after few files have been classified and predicted, is it possible to merge all the result in one csv file.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Finally the &lt;span style=&quot; font-weight:600;&quot;&gt;settings&lt;/span&gt; tab will let you choose wich features to use in the classification and prediction, &lt;br/&gt;length of each chunk, and the overlap starting point. To have a 1/10 sec precision, the suggested values are: &lt;br/&gt;overlap of 4410 and window length of 8820. Every analyzed audio is resampled in 44100Hz.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="classify_tab">
+       <attribute name="title">
+        <string>Classify</string>
+       </attribute>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>11</x>
+          <y>11</y>
+          <width>751</width>
+          <height>501</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="classify_gridLayout">
+         <item row="1" column="0">
+          <layout class="QVBoxLayout" name="classify_source_verticalLayout">
+           <item>
+            <widget class="QLabel" name="classify_source_label">
+             <property name="text">
+              <string>Source: select the folder containing the audio samples to classify</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="classify_source_horizontalLayout">
+             <item>
+              <widget class="QPushButton" name="classify_source_browse">
+               <property name="text">
+                <string>Browse</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="classify_source_path"/>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item row="3" column="0">
+          <layout class="QVBoxLayout" name="classify_destination_verticalLayout">
+           <item>
+            <widget class="QLabel" name="classify_destination_select">
+             <property name="text">
+              <string>Destination: select the folder where the features will be extracted.&lt;br/&gt;
+*.arrf file will be generated, in selected folder, named after &quot;relation name&quot;, &lt;br/&gt;
+if such files already exists, they will be overwritten.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="classify_destination_horizontalLayout">
+             <item>
+              <widget class="QPushButton" name="classify_destination_browse">
+               <property name="text">
+                <string>Browse</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="classify_destination_path"/>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item row="2" column="0">
+          <layout class="QVBoxLayout" name="classify_relation_verticalLayout">
+           <item>
+            <widget class="QLabel" name="clssify_relation_label">
+             <property name="text">
+              <string>Insert the relation name</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="classify_relation_name"/>
+           </item>
+          </layout>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="classify_info_label">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;In this section you will be able to classify your samples, and create new instruments classifications.&lt;br/&gt;
+A model to use in the &quot;Predict&quot; section will also be generate.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <layout class="QHBoxLayout" name="classify_start_horizontalLayout">
+           <item alignment="Qt::AlignHCenter">
+            <widget class="QPushButton" name="classify_start_button">
+             <property name="text">
+              <string>Start</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QProgressBar" name="classify_start_progressBar">
+             <property name="value">
+              <number>24</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="predict_tab">
+       <attribute name="title">
+        <string>Predict</string>
+       </attribute>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>11</x>
+          <y>11</y>
+          <width>751</width>
+          <height>501</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="predict_gridLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="predict_info_label">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;In this section you will be able to make predictions, based on the classifications created in the &quot;Classify&quot; section, &lt;br&gt;so temporaly locate notes on audio files&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <layout class="QVBoxLayout" name="predict_source_verticalLayout">
+           <item>
+            <widget class="QLabel" name="predict_source_label">
+             <property name="text">
+              <string>Source: select the audio file to analyze</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="predict_source_horizontalLayout">
+             <item>
+              <widget class="QPushButton" name="predict_source_browse">
+               <property name="text">
+                <string>Browse</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="predict_source_path"/>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item row="5" column="0">
+          <layout class="QHBoxLayout" name="redict_start_horizontalLayout">
+           <item alignment="Qt::AlignHCenter">
+            <widget class="QPushButton" name="predict_start_button">
+             <property name="text">
+              <string>Start</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QProgressBar" name="predict_start_progressBar">
+             <property name="value">
+              <number>24</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="3" column="0">
+          <layout class="QVBoxLayout" name="predict_destination_verticalLayout">
+           <item>
+            <widget class="QLabel" name="predict_destination_select">
+             <property name="text">
+              <string>Destination: select the folder where the *,csv file with informations will be stored</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="predict_destination_horizontalLayout">
+             <item>
+              <widget class="QPushButton" name="predict_destination_browse">
+               <property name="text">
+                <string>Browse</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="predict_destination_path"/>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item row="2" column="0">
+          <layout class="QVBoxLayout" name="predict_relation_verticalLayout">
+           <item>
+            <widget class="QLabel" name="predict_relation_label">
+             <property name="text">
+              <string>Reference: select the *.arff file to use during the prediction</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="predict_relation_horizontalLayout">
+             <item>
+              <widget class="QPushButton" name="predict_relation_browse">
+               <property name="text">
+                <string>Browse</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="predict_relation_path"/>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="merge_tab">
+       <attribute name="title">
+        <string>Merge</string>
+       </attribute>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>751</width>
+          <height>501</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="merge_verticalLayout">
+         <item>
+          <widget class="QLabel" name="merge_info_label">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;In this section you can select multiple *.csv files to compare generating a new one. &lt;br/&gt;The new one will include the informations of all selected files&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="merge_horizontalLayout">
+           <item>
+            <widget class="QPushButton" name="merge_select_button">
+             <property name="text">
+              <string>Browse</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTextEdit" name="merge_paths_list"/>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QLabel" name="merge_destination_label">
+             <property name="text">
+              <string>Select the destination</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QPushButton" name="merge_destination_browse">
+               <property name="text">
+                <string>Browse</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="merge_destination_path"/>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item alignment="Qt::AlignHCenter">
+            <widget class="QPushButton" name="merge_start_button">
+             <property name="text">
+              <string>Start</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QProgressBar" name="merge_start_progressBar">
+             <property name="value">
+              <number>24</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="settings_tab">
+       <attribute name="title">
+        <string>Settings</string>
+       </attribute>
+       <widget class="QScrollArea" name="settings_scrollArea">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>781</width>
+          <height>551</height>
+         </rect>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="settings_scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>765</width>
+           <height>630</height>
+          </rect>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="9" column="0">
+           <layout class="QVBoxLayout" name="settings_predict_verticalLayout_5">
+            <item>
+             <widget class="QLabel" name="settings_predict_overlap_label">
+              <property name="text">
+               <string>Overlap distance (sampels before starting overlap)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="settings_predict_overlap_lineEdit"/>
+            </item>
+           </layout>
+          </item>
+          <item row="5" column="0">
+           <spacer name="settings_verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>80</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="10" column="0">
+           <layout class="QHBoxLayout" name="settings_horizontalLayout">
+            <item>
+             <spacer name="settings_buttons_horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="settings_reset_button">
+              <property name="text">
+               <string>Reset</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="settings_apply_button">
+              <property name="text">
+               <string>Apply</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="settings_predict_label">
+            <property name="text">
+             <string>Predict Settings:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <layout class="QVBoxLayout" name="settings_classify_verticalLayout_2">
+            <item>
+             <widget class="QLabel" name="settings_classify_window_len_label">
+              <property name="text">
+               <string>Window length (samples lenght)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="settings_classify_window_len_lineEdit"/>
+            </item>
+           </layout>
+          </item>
+          <item row="7" column="0">
+           <layout class="QVBoxLayout" name="settings_predict_verticalLayout_3">
+            <item>
+             <widget class="QLabel" name="settings_predict_features_label">
+              <property name="text">
+               <string>Features</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="settings_predict_verticalLayout">
+              <item>
+               <widget class="QCheckBox" name="settings_predict_mean_checkbox">
+                <property name="text">
+                 <string>mean</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="settings_predict_variance_checkbox">
+                <property name="text">
+                 <string>variance</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="settings_predict_1_deg_der_mean_checkbox">
+                <property name="text">
+                 <string>1st deg mean derivative</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="settings_predict_2_deg_der_mean_checkbox">
+                <property name="text">
+                 <string>2nd deg mean derivative</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="settings_classify_label">
+            <property name="text">
+             <string>Classify Settings:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <layout class="QVBoxLayout" name="settings_classify_verticalLayout_1">
+            <item>
+             <widget class="QLabel" name="settings_classify_features_label">
+              <property name="text">
+               <string>Features</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="settings_classify_verticalLayout_5">
+              <item>
+               <widget class="QCheckBox" name="settings_classify_mean_checkbox">
+                <property name="text">
+                 <string>mean</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="settings_classify_variance_checkbox">
+                <property name="text">
+                 <string>variance</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="settings_classify_1_deg_der_mean_checkbox">
+                <property name="text">
+                 <string>1st deg mean derivative</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="settings_classify_2_deg_der_mean_checkbox">
+                <property name="text">
+                 <string>2nd deg mean derivative</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="settings_info_label">
+            <property name="styleSheet">
+             <string notr="true">QLabel:{
+	text-decoration: underline
+}</string>
+            </property>
+            <property name="text">
+             <string>It is reccomended to have the same settings for prediction and classification</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <layout class="QVBoxLayout" name="settings_classify_verticalLayout_3">
+            <item>
+             <widget class="QLabel" name="settings_classify_overlap_label">
+              <property name="text">
+               <string>Overlap distance (sampels before starting overlap)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="settings_classify_overlap_lineEdit"/>
+            </item>
+           </layout>
+          </item>
+          <item row="8" column="0">
+           <layout class="QVBoxLayout" name="settings_predict_verticalLayout_4">
+            <item>
+             <widget class="QLabel" name="settings_predict_window_len_label">
+              <property name="text">
+               <string>Window length (samples lenght)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="settings_predict_window_len_lineEdit"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
