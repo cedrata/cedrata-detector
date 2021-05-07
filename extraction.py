@@ -81,7 +81,7 @@ class Extract():
         sub_sample_value = 5
 
         # While the sample as enough points of measurement it'll loop
-        while sub_sample_end - sub_sample_start >= min_data_len and sub_sample_end+sub_sample_shift < len(data):
+        while sub_sample_end < len(data):
 
             # Selecting alll samples from the 1st to the 8820st
             sub_sample = data[sub_sample_start:sub_sample_end]
