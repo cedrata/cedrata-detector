@@ -1,6 +1,6 @@
 # Cedrata Detector
 
-This is my (Luca Greggio) Diploma final project at UniFe, it is a python ML program able to recognize in an instrument track where notes are played.
+This is my (Luca Greggio/Cedrata) Diploma final project at UniFe, it is a python ML program able to recognize in an instrument track where notes are played.
 
 ## Features or Example
 
